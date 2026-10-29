@@ -1,0 +1,1200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>MediConnect</title>
+
+<style>
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    background: #f4f8fb;
+    color: #17202a;
+}
+
+/* LOGIN PAGE */
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: linear-gradient(135deg, #087f8c, #12a4a6);
+}
+
+.login-box {
+    background: white;
+    width: 380px;
+    padding: 35px;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    text-align: center;
+}
+
+.login-box h1 {
+    color: #087f8c;
+    margin-bottom: 10px;
+}
+
+.login-box p {
+    color: #777;
+    margin-bottom: 25px;
+}
+
+.login-box input {
+    width: 100%;
+    padding: 14px;
+    margin: 8px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 14px;
+    margin-top: 15px;
+    border: none;
+    border-radius: 8px;
+    background: #087f8c;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+/* DASHBOARD */
+
+#dashboard {
+    display: none;
+}
+
+header {
+    background: linear-gradient(135deg, #087f8c, #12a4a6);
+    color: white;
+    padding: 20px 7%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 25px;
+    font-weight: bold;
+}
+
+.logout {
+    background: white;
+    color: #087f8c;
+    border: none;
+    padding: 9px 15px;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+.welcome {
+    padding: 35px 7%;
+    background: white;
+}
+
+.welcome h1 {
+    color: #087f8c;
+    margin-bottom: 8px;
+}
+
+.container {
+    width: 86%;
+    margin: 30px auto;
+}
+
+.card {
+    background: white;
+    padding: 25px;
+    margin-bottom: 25px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.07);
+}
+
+.card h2 {
+    color: #087f8c;
+    margin-bottom: 20px;
+}
+
+/* SERVICES */
+
+.services {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.service {
+    background: #eef8f8;
+    padding: 22px;
+    border-radius: 12px;
+}
+
+.service h3 {
+    color: #087f8c;
+    margin-bottom: 10px;
+}
+
+.service button {
+    margin-top: 15px;
+    padding: 10px 15px;
+    border: none;
+    background: #087f8c;
+    color: white;
+    border-radius: 7px;
+    cursor: pointer;
+}
+
+/* SYMPTOMS */
+
+.symptoms {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+}
+
+.symptoms label {
+    background: #eef8f8;
+    padding: 14px;
+    border-radius: 9px;
+    cursor: pointer;
+}
+
+.analyze {
+    margin-top: 18px;
+    padding: 13px 20px;
+    border: none;
+    background: #087f8c;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.result {
+    display: none;
+    margin-top: 20px;
+    padding: 18px;
+    background: #fff7df;
+    border-left: 5px solid #e0a800;
+}
+
+/* EMERGENCY */
+
+.emergency {
+    border-left: 5px solid #e53935;
+}
+
+.emergency h2 {
+    color: #d32f2f;
+}
+
+.sos {
+    margin-top: 15px;
+    padding: 13px 20px;
+    border: none;
+    background: #d32f2f;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+footer {
+    text-align: center;
+    padding: 25px;
+    background: #17202a;
+    color: white;
+}
+
+/* MOBILE */
+
+@media(max-width:700px) {
+
+    .services {
+        grid-template-columns: 1fr;
+    }
+
+    .symptoms {
+        grid-template-columns: 1fr;
+    }
+
+    .login-box {
+        width: 90%;
+    }
+}
+</style>
+</head>
+
+<body>
+
+
+<!-- LOGIN -->
+
+<div class="login-page" id="loginPage">
+
+    <div class="login-box">
+
+        <h1>🩺 MediConnect</h1>
+
+        <p>Smart Digital Healthcare Assistant</p>
+
+        <input
+            type="text"
+            id="username"
+            placeholder="Enter your name"
+        >
+
+        <input
+            type="email"
+            placeholder="Email address"
+        >
+
+        <button onclick="login()">
+            Login to MediConnect
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- DASHBOARD -->
+
+<div id="dashboard">
+
+<header>
+
+    <div class="logo">
+        🩺 MediConnect
+    </div>
+
+    <button class="logout" onclick="logout()">
+        Logout
+    </button>
+
+</header>
+
+
+<section class="welcome">
+
+    <h1>
+        Welcome, <span id="userName"></span> 👋
+    </h1>
+
+    <p>
+        Your healthcare assistance dashboard
+    </p>
+
+</section>
+<!-- DASHBOARD SUMMARY -->
+
+<div class="container">
+
+    <div style="
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:18px;
+        margin-bottom:25px;
+    ">
+
+        <div style="
+            background:white;
+            padding:22px;
+            border-radius:15px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.07);
+        ">
+            <h3 style="color:#087f8c;">🩺 Health Check</h3>
+            <p style="margin-top:10px;">
+                Symptom Assistant
+            </p>
+            <strong style="display:block;margin-top:8px;">
+                Available
+            </strong>
+        </div>
+
+
+        <div style="
+            background:white;
+            padding:22px;
+            border-radius:15px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.07);
+        ">
+            <h3 style="color:#087f8c;">📅 Appointment</h3>
+            <p style="margin-top:10px;">
+                Healthcare Booking
+            </p>
+            <strong style="display:block;margin-top:8px;">
+                Ready to Book
+            </strong>
+        </div>
+
+
+        <div style="
+            background:white;
+            padding:22px;
+            border-radius:15px;
+            box-shadow:0 5px 20px rgba(0,0,0,0.07);
+        ">
+            <h3 style="color:#d32f2f;">🚨 Emergency</h3>
+            <p style="margin-top:10px;">
+                Emergency Support
+            </p>
+            <strong style="display:block;margin-top:8px;">
+                Available 24/7
+            </strong>
+        </div>
+
+    </div>
+
+</div>
+
+<div class="container">
+
+
+<!-- SERVICES -->
+
+<div class="card">
+
+    <h2>Healthcare Services</h2>
+
+    <div class="services">
+
+        <div class="service">
+
+            <h3>🔍 Symptom Assistant</h3>
+
+            <p>
+                Record your symptoms and receive
+                basic healthcare guidance.
+            </p>
+
+            <button onclick="scrollToSymptoms()">
+                Check Symptoms
+            </button>
+
+        </div>
+
+
+        <div class="service">
+
+            <h3>🏥 Find Hospital</h3>
+
+            <p>
+                Find nearby hospitals and healthcare
+                facilities.
+            </p>
+
+            <button onclick="findHospital()">
+                Find Hospital
+            </button>
+
+        </div>
+        <div id="hospitalPanel" style="
+    display:none;
+    margin-top:25px;
+    padding:20px;
+    background:#f1fbfb;
+    border-radius:12px;
+">
+
+    <h3 style="color:#087f8c; margin-bottom:15px;">
+        🏥 Nearby Healthcare Facilities
+    </h3>
+
+    <div id="hospitalList"></div>
+
+</div>
+
+
+        <div class="service">
+
+            <h3>📅 Appointment</h3>
+
+            <p>
+                Request an appointment with a
+                healthcare provider.
+            </p>
+
+            <button onclick="appointment()">
+                Book Appointment
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- SYMPTOM CHECKER -->
+
+<div class="card" id="symptomSection">
+
+    <h2>🔍 Smart Symptom Assistant</h2>
+
+    <p>
+        Select the symptoms you are experiencing:
+    </p>
+
+    <br>
+
+    <div class="symptoms">
+
+        <label>
+            <input type="checkbox" value="fever">
+            Fever
+        </label>
+
+        <label>
+            <input type="checkbox" value="cough">
+            Cough
+        </label>
+
+        <label>
+            <input type="checkbox" value="headache">
+            Headache
+        </label>
+
+        <label>
+            <input type="checkbox" value="bodypain">
+            Body Pain
+        </label>
+
+        <label>
+            <input type="checkbox" value="breathing">
+            Breathing Difficulty
+        </label>
+
+        <label>
+            <input type="checkbox" value="chestpain">
+            Chest Pain
+        </label>
+
+    </div>
+
+    <button
+        class="analyze"
+        onclick="analyzeSymptoms()"
+    >
+        Analyze Symptoms
+    </button>
+
+    <div
+        class="result"
+        id="result"
+    ></div>
+
+</div>
+
+
+<!-- EMERGENCY -->
+
+<div class="card emergency">
+
+    <h2>🚨 Emergency Support</h2>
+
+    <p>
+        For serious or life-threatening emergencies,
+        seek immediate professional medical help.
+    </p>
+
+    <button
+        class="sos"
+        onclick="emergencyHelp()"
+    >
+        🚑 Emergency Help
+    </button>
+
+</div>
+<!-- EMERGENCY PANEL -->
+
+<div class="card" id="emergencyPanel" style="display:none;">
+
+    <h2 style="color:#d32f2f;">
+        🚨 Emergency Assistance
+    </h2>
+
+    <p>
+        If you are experiencing a serious or life-threatening
+        emergency, seek immediate professional medical help.
+    </p>
+
+    <div style="
+        background:#fff3f3;
+        padding:20px;
+        margin-top:18px;
+        border-radius:12px;
+        border-left:5px solid #d32f2f;
+    ">
+
+        <h3>⚠️ Immediate Steps</h3>
+
+        <p style="margin-top:10px;">
+            • Stay calm and move to a safe place if possible.
+        </p>
+
+        <p style="margin-top:8px;">
+            • Contact your local emergency service.
+        </p>
+
+        <p style="margin-top:8px;">
+            • Do not delay professional medical care.
+        </p>
+
+        <button
+            class="sos"
+            onclick="callEmergency()"
+        >
+            📞 Emergency Assistance
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- HEALTH HISTORY -->
+
+<div class="card">
+
+    <h2>📋 Health History</h2>
+
+    <p>
+        View your healthcare activity and previous records.
+    </p>
+
+    <button
+        class="analyze"
+        onclick="healthHistory()"
+    >
+        📋 View Health History
+    </button>
+
+</div>
+
+
+<!-- HEALTH HISTORY PANEL -->
+
+<div
+    class="card"
+    id="healthHistoryPanel"
+    style="display:none;"
+>
+
+    <h2>🗂️ My Health Records</h2>
+
+    <div style="
+        background:#eef8f8;
+        padding:18px;
+        border-radius:12px;
+        margin-bottom:15px;
+    ">
+
+        <h3>👤 Patient Profile</h3>
+
+        <p style="margin-top:10px;">
+            <strong>Name:</strong>
+            <span id="historyPatientName">Patient</span>
+        </p>
+
+        <p style="margin-top:8px;">
+            <strong>Record ID:</strong> MC-2026-001
+        </p>
+
+    </div>
+
+
+    <div style="
+        background:#f8f9fa;
+        padding:18px;
+        border-radius:12px;
+        margin-bottom:15px;
+    ">
+
+        <h3>🩺 Recent Health Activity</h3>
+
+        <p style="margin-top:12px;">
+            <strong>Symptom Check</strong>
+        </p>
+
+        <p>
+            General symptoms recorded for healthcare guidance.
+        </p>
+
+        <p style="margin-top:8px;">
+            📅 September 2026
+        </p>
+
+    </div>
+
+
+    <div style="
+        background:#f8f9fa;
+        padding:18px;
+        border-radius:12px;
+        margin-bottom:15px;
+    ">
+
+        <h3>📅 Appointment History</h3>
+
+        <p style="margin-top:12px;">
+            Healthcare appointment request submitted.
+        </p>
+
+        <p style="margin-top:8px;">
+            Status: <strong>Prototype Record</strong>
+        </p>
+
+    </div>
+
+
+    <div style="
+        background:#fff7df;
+        padding:18px;
+        border-radius:12px;
+        border-left:5px solid #e0a800;
+    ">
+
+        <h3>🔒 Privacy & Security</h3>
+
+        <p style="margin-top:10px;">
+            Health records are intended to be securely
+            stored and accessible only to authorized users.
+        </p>
+
+        <p style="margin-top:8px;">
+            <strong>Note:</strong> This is a software prototype
+            using demonstration data.
+        </p>
+
+    </div>
+
+</div>
+
+</div>
+
+
+<footer>
+
+    MediConnect © 2026 |
+    Digital Healthcare Prototype
+
+</footer>
+
+</div>
+
+<!-- APPOINTMENT BOOKING -->
+
+<div class="card" id="appointmentPanel" style="display:none;">
+
+    <h2>📅 Book Healthcare Appointment</h2>
+
+    <p>
+        Select your preferred hospital, doctor and appointment time.
+    </p>
+
+    <br>
+
+    <label>
+        Patient Name
+    </label>
+
+    <input
+        type="text"
+        id="patientName"
+        placeholder="Enter patient name"
+        style="
+            width:100%;
+            padding:13px;
+            margin:8px 0 15px;
+            border:1px solid #ddd;
+            border-radius:8px;
+        "
+    >
+
+    <label>
+        Select Hospital
+    </label>
+
+    <select
+        id="hospital"
+        style="
+            width:100%;
+            padding:13px;
+            margin:8px 0 15px;
+            border:1px solid #ddd;
+            border-radius:8px;
+        "
+    >
+
+        <option value="">Choose Hospital</option>
+
+        <option>
+            City Care Hospital
+        </option>
+
+        <option>
+            MediLife Hospital
+        </option>
+
+        <option>
+            HealthPlus Clinic
+        </option>
+
+    </select>
+
+
+    <label>
+        Select Doctor
+    </label>
+
+    <select
+        id="doctor"
+        style="
+            width:100%;
+            padding:13px;
+            margin:8px 0 15px;
+            border:1px solid #ddd;
+            border-radius:8px;
+        "
+    >
+
+        <option value="">Choose Doctor</option>
+
+        <option>
+            General Physician
+        </option>
+
+        <option>
+            Cardiologist
+        </option>
+
+        <option>
+            Dermatologist
+        </option>
+
+    </select>
+
+
+    <label>
+        Appointment Date
+    </label>
+
+    <input
+        type="date"
+        id="appointmentDate"
+        style="
+            width:100%;
+            padding:13px;
+            margin:8px 0 15px;
+            border:1px solid #ddd;
+            border-radius:8px;
+        "
+    >
+
+
+    <label>
+        Preferred Time
+    </label>
+
+    <select
+        id="appointmentTime"
+        style="
+            width:100%;
+            padding:13px;
+            margin:8px 0 15px;
+            border:1px solid #ddd;
+            border-radius:8px;
+        "
+    >
+
+        <option value="">Choose Time</option>
+
+        <option>10:00 AM</option>
+        <option>11:00 AM</option>
+        <option>12:00 PM</option>
+        <option>3:00 PM</option>
+        <option>4:00 PM</option>
+        <option>5:00 PM</option>
+
+    </select>
+
+
+    <button
+        class="analyze"
+        onclick="confirmAppointment()"
+    >
+        ✅ Confirm Appointment
+    </button>
+
+
+    <div
+        id="appointmentResult"
+        style="
+            display:none;
+            margin-top:20px;
+            padding:18px;
+            background:#eaf8f1;
+            border-left:5px solid #16a085;
+            border-radius:8px;
+        "
+    ></div>
+
+</div>
+
+
+
+
+<script>
+
+/* LOGIN */
+
+function login() {
+
+    let name =
+        document.getElementById("username").value;
+
+    if (name.trim() === "") {
+
+        alert("Please enter your name.");
+
+        return;
+    }
+
+    document.getElementById("userName").innerText =
+        name;
+
+    document.getElementById("loginPage").style.display =
+        "none";
+
+    document.getElementById("dashboard").style.display =
+        "block";
+}
+
+
+/* LOGOUT */
+
+function logout() {
+
+    document.getElementById("dashboard").style.display =
+        "none";
+
+    document.getElementById("loginPage").style.display =
+        "flex";
+}
+
+
+/* SYMPTOM ANALYSIS */
+
+function analyzeSymptoms() {
+
+    let symptoms = [];
+
+    document.querySelectorAll(
+        '.symptoms input:checked'
+    ).forEach(function(item) {
+
+        symptoms.push(item.value);
+
+    });
+
+    let result =
+        document.getElementById("result");
+
+    result.style.display = "block";
+
+
+    if (symptoms.length === 0) {
+
+        result.innerHTML =
+            "⚠️ Please select at least one symptom.";
+
+        return;
+    }
+
+
+    let serious =
+        symptoms.includes("breathing") ||
+        symptoms.includes("chestpain");
+
+
+    if (serious) {
+
+        result.innerHTML = `
+            <h3>🚨 Medical Attention Recommended</h3>
+            <br>
+            <p>
+            Some reported symptoms may require
+            prompt professional evaluation.
+            </p>
+            <br>
+            <strong>
+            Please seek appropriate medical care,
+            especially if symptoms are severe.
+            </strong>
+        `;
+
+    } else {
+
+        result.innerHTML = `
+            <h3>ℹ️ Healthcare Guidance</h3>
+            <br>
+            <p>
+            Your symptoms have been recorded.
+            Please consult a qualified healthcare
+            professional for proper evaluation.
+            </p>
+            <br>
+            <strong>
+            MediConnect does not provide a medical diagnosis.
+            </strong>
+        `;
+    }
+}
+
+
+/* SCROLL */
+
+function scrollToSymptoms() {
+
+    document.getElementById(
+        "symptomSection"
+    ).scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+
+/* HOSPITAL */
+
+function findHospital() {
+
+    let panel = document.getElementById("hospitalPanel");
+    let list = document.getElementById("hospitalList");
+
+    panel.style.display = "block";
+
+    list.innerHTML = `
+    <div style="
+    background:#fff7df;
+    padding:12px;
+    margin-bottom:15px;
+    border-radius:8px;
+    border-left:4px solid #e0a800;
+">
+    ⚠️ <strong>Prototype Data:</strong>
+    Hospital details shown here are for demonstration purposes.
+</div>
+    
+        <div style="
+            background:white;
+            padding:18px;
+            margin-bottom:12px;
+            border-radius:10px;
+        ">
+
+            <h3>🏥 City Care Hospital</h3>
+
+            <p>📍 2.4 km away</p>
+
+            <p>🕐 Open 24 Hours</p>
+
+            <button onclick="appointment()">
+                📅 Request Appointment
+            </button>
+
+        </div>
+
+
+        <div style="
+            background:white;
+            padding:18px;
+            margin-bottom:12px;
+            border-radius:10px;
+        ">
+
+            <h3>🏥 MediLife Hospital</h3>
+
+            <p>📍 3.1 km away</p>
+
+            <p>🕐 Open 24 Hours</p>
+
+            <button onclick="appointment()">
+                📅 Request Appointment
+            </button>
+
+        </div>
+
+
+        <div style="
+            background:white;
+            padding:18px;
+            border-radius:10px;
+        ">
+
+            <h3>🏥 HealthPlus Clinic</h3>
+
+            <p>📍 4.2 km away</p>
+
+            <p>🕐 Open Today</p>
+
+            <button onclick="appointment()">
+                📅 Request Appointment
+            </button>
+
+        </div>
+
+    `;
+
+}
+
+
+/* APPOINTMENT */
+
+function appointment() {
+
+    let panel = document.getElementById("appointmentPanel");
+
+    panel.style.display = "block";
+
+    panel.scrollIntoView({
+        behavior: "smooth"
+    });
+}
+function confirmAppointment() {
+
+    let name =
+        document.getElementById("patientName").value;
+
+    let hospital =
+        document.getElementById("hospital").value;
+
+    let doctor =
+        document.getElementById("doctor").value;
+
+    let date =
+        document.getElementById("appointmentDate").value;
+
+    let time =
+        document.getElementById("appointmentTime").value;
+
+
+    if (
+        name === "" ||
+        hospital === "" ||
+        doctor === "" ||
+        date === "" ||
+        time === ""
+    ) {
+
+        alert(
+            "⚠️ Please complete all appointment details."
+        );
+
+        return;
+    }
+
+
+    let result =
+        document.getElementById("appointmentResult");
+
+
+    result.style.display = "block";
+
+
+    result.innerHTML = `
+    
+        <h3>✅ Appointment Request Confirmed</h3>
+
+        <br>
+
+        <p>
+        <strong>Patient:</strong>
+        ${name}
+        </p>
+
+        <p>
+        <strong>Hospital:</strong>
+        ${hospital}
+        </p>
+
+        <p>
+        <strong>Doctor:</strong>
+        ${doctor}
+        </p>
+
+        <p>
+        <strong>Date:</strong>
+        ${date}
+        </p>
+
+        <p>
+        <strong>Time:</strong>
+        ${time}
+        </p>
+
+        <br>
+
+        <strong>
+        Appointment ID: MC${Math.floor(Math.random() * 90000 + 10000)}
+        </strong>
+
+    `;
+}
+/* HEALTH HISTORY */
+
+function healthHistory() {
+
+    let panel =
+        document.getElementById("healthHistoryPanel");
+
+    let name =
+        document.getElementById("userName").innerText;
+
+    document.getElementById("historyPatientName").innerText =
+        name;
+
+    panel.style.display = "block";
+
+    panel.scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+/* EMERGENCY */
+
+function emergencyHelp() {
+
+    let panel = document.getElementById("emergencyPanel");
+
+    panel.style.display = "block";
+
+    panel.scrollIntoView({
+        behavior: "smooth"
+    });
+}
+
+function callEmergency() {
+
+    alert(
+        "🚨 Emergency Assistance\n\n" +
+        "Please contact your local emergency service " +
+        "or seek immediate professional medical care."
+    );
+
+}
+
+</script>
+
+</body>
+</html>
